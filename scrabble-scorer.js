@@ -39,13 +39,28 @@ function initialPrompt() {
 };
 
 
-let simpleScorer;
+let simpleScorer = (word)=>{
+      return word.length 
+};
 
-let vowelBonusScorer;
+let vowelBonusScorer=(word)=>{
+   let vowels = ["a","e", "i", "o", "u"]
+   let score = 0;
+   for (i = 0; i < word.length; i++){
+      let letter = word[i].toLowerCase();
+      if (vowels.includes(letter)){
+         score += 3
+      }else
+      score++
+    }
+   return score
+};
+
+// console.log(vowelBonusScorer("Hello"))
 
 let scrabbleScorer;
 
-const scoringAlgorithms = [];
+const scoringAlgorithms = [simpleScorer, vowelBonusScorer, oldScrabbleScorer];
 
 function scorerPrompt() {}
 
