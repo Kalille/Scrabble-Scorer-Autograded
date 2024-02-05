@@ -44,7 +44,7 @@ function initialPrompt() {
 
 
 let simpleScorer = (word)=>{
-   console.log(`Your score is ${word.length}`)
+   console.log(`Your score for '${word}' is ${word.length}`)
       return word.length 
 };
 
@@ -63,7 +63,7 @@ let vowelBonusScorer=(word)=>{
 
    
     }
-    console.log(`your score is ${score}`)
+    console.log(`your score for '${word}' is ${score}`)
    return score
 };
 
@@ -79,7 +79,7 @@ let scrabbleScorer=(word)=>{
        }
       }
    }
- console.log(`your score is ${totalScore}`)
+ console.log(`your score for '${word}' is ${totalScore}`)
    return totalScore
 
 };
@@ -95,7 +95,12 @@ const scoringAlgorithms = [
 
 function scorerPrompt() {
    let scoringPrompt = Number(input.question("Which scoring style is suitable for you: \n 0 - Simple: One point per character \n 1 - Vowel Bonus: Vowels are worth 3 points  \n 2 - Scrabble: Uses scrabble point system \n Enter 0, 1, 2: "));
-   return scoringAlgorithms[scoringPrompt].scorerFunction(userWord)
+   if (scoringPrompt < 3){
+      return scoringAlgorithms[scoringPrompt].scorerFunction(userWord)
+}else{
+  let errorMessageAndNewInput = Number(input.question(`Invalid entry, you must select from numbers 0 - 2: `))
+  return scoringAlgorithms[errorMessageAndNewInput].scorerFunction(userWord)
+}
 
 }
 
@@ -109,9 +114,12 @@ function transform(oldPointStructure) {
     });
      
    }
-
+   newScoringStructure[" "] = 0
+   // console.log(newScoringStructure)
   return newScoringStructure
 };
+
+// console.log(transform(oldPointStructure))
 
 
 
