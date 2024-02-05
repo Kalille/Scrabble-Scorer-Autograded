@@ -74,6 +74,7 @@ let scrabbleScorer=(word)=>{
    for (i = 0; i < word.length; i++){
       for (key in newPointStructure){
        if(key === word[i]){
+         console.log(`Point for '${word[i]}': ${newPointStructure[key]} `)
          totalScore += newPointStructure[key]
        }
       }
@@ -102,7 +103,6 @@ function scorerPrompt() {
 function transform(oldPointStructure) {
    let newScoringStructure = {}
    for (key in oldPointStructure){
-
     oldPointStructure[key].forEach(letter => {
    let loweredLetter = letter.toLowerCase()
       newScoringStructure[loweredLetter] = parseInt(key)
